@@ -1,3 +1,5 @@
+import { sql } from "../config/db.js"
+
 export async function getTransactionsByUserId(req, res) {
     try {
         const { user_id } = req.params;
@@ -27,8 +29,8 @@ export async function createTransaction(req, res) {
         }
 
         const result = await sql`
-            INSERT INTO transactions(user_id, amount, meter_id, status)
-            VALUES (${user_id}, ${amount}, ${meter_id}, 'PENDING')
+            INSERT INTO transactions(user_id, amount, meter_id, category, status)
+            VALUES (${user_id}, ${amount}, ${meter_id}, ${category} 'PENDING')
             RETURNING *
         `;
 
